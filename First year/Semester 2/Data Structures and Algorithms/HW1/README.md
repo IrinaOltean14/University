@@ -1,4 +1,4 @@
-
+# Data Structures and Algorithms - Lab 1: Dynamic Array
 Implement in C++ the given container (ADT) using a given representation and a dynamic array as a data structure. You are not allowed to use the vector from STL or from any other library. 
 Obs:
  - Since your implementation will use dynamic allocation, it is a good practice to implement a destructor, copy constructor and assignment operator as well (even if they are not on the interface). 

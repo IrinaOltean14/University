@@ -1,0 +1,6 @@
+Rent, 5, 250
+Groceries, 10, 300
+Jacket, 25, 150
+Shoes, 7, 200
+Birthday Gift, 14, 100
+fwqf, 12, 21

@@ -1,0 +1,60 @@
+// sumFifo1.c
+#include <stdlib.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+int main(int argc, char** argv){
+
+        // A
+        int a2b, b2a;
+        int a, b, s, p;
+        a2b = open("a2b", O_WRONLY);
+        b2a = open("b2a", O_RDONLY);
+
+        while(1){
+                printf("A=");
+                scanf("%d", &a);
+                printf("B=");
+                scanf("%d", &b);
+                write(a2b, &a, sizeof(int));
+                write(a2b, &b, sizeof(int));
+                if (read(b2a, &s, sizeof(int)) <=0) {break;}
+                if (read(b2a, &p, sizeof(int)) <=0) {break;}
+                printf("S = %d\nP= %d\n", s, p);
+                if (p == s){
+                        break;
+                }
+        }
+        close(a2b);
+        close(b2a);
+        return 0;
+
+// sumFifo2.c
+#include <stdlib.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+int main(int argc, char** argv){
+
+        // A
+        int a2b, b2a;
+        int a, b, s, p;
+        a2b = open("a2b", O_RDONLY);
+        b2a = open("b2a", O_WRONLY);
+
+        while(1){
+                if (read(a2b, &a, sizeof(int)) <=0) {break;}
+                if (read(a2b, &b, sizeof(int)) <=0) {break;}
+                s=a+b;
+                p=a*b;
+                printf("S = %d\nP= %d\n",s, p);
+                write(b2a, &s, sizeof(int));
+                write(b2a, &p, sizeof(int));
+                if (p==s){
+                        break;
+                }
+        }
+        close(a2b);
+        close(b2a);
+        return 0;
+}

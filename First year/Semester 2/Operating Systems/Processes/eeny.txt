@@ -1,0 +1,87 @@
+// eeny1.c
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <fcntl.h>
+
+int main(int argc, char** argv){
+        //A
+        int a2b, c2a;
+        int n;
+        a2b = open("a2b", O_WRONLY);
+        c2a = open("c2a", O_RDONLY);
+        n = 20;
+        write(a2b, &n, sizeof(int));
+        while (1){
+                if (read(c2a, &n, sizeof(int)) <= 0){
+                        break;
+                }
+                if (n <= 0){
+                        break;
+                }
+                n--;
+                printf("A: %d\n", n);
+                write(a2b, &n, sizeof(int));
+        }
+        close(a2b);
+        close(c2a);
+
+        return 0;
+}
+
+// eeny2.c
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <fcntl.h>
+
+int main(int argc, char** argv){
+        //B
+        int a2b, b2c;
+        int n;
+        a2b = open("a2b", O_RDONLY);
+        b2c = open("b2c", O_WRONLY);
+        while (1){
+                if (read(a2b, &n, sizeof(int)) <= 0){
+                        break;
+                }
+                if (n <= 0){
+                        break;
+                }
+                n--;
+                printf("B: %d\n", n);
+                write(b2c, &n, sizeof(int));
+        }
+        close(a2b);
+        close(b2c);
+        return 0;
+}
+
+// eeny3.c
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <fcntl.h>
+
+int main(int argc, char** argv){
+        //C
+        int b2c, c2a;
+        int n;
+        c2a = open("c2a", O_WRONLY);
+        b2c = open("b2c", O_RDONLY);
+        while (1){
+                if (read(b2c, &n, sizeof(int)) <= 0){
+                        break;
+                }
+                if (n <= 0){
+                        break;
+                }
+                n--;
+                printf("A: %d\n", n);
+                write(c2a, &n, sizeof(int));
+        }
+        close(c2a);
+        close(b2c);
+        return 0;
+}

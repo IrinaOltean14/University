@@ -1,0 +1,240 @@
+
+------------------
+Execution Stack: 
+(string varf;(varf = test.in;(Open(varf);(int varc;(Read from varf into varc;(print(varc);(Read from varf into varc;(print(varc);close(varf)))))))))
+
+Symbol Table:
+[ 
+]
+Output Table:
+
+File Table:
+{}
+------------------
+Execution Stack: 
+string varf
+(varf = test.in;(Open(varf);(int varc;(Read from varf into varc;(print(varc);(Read from varf into varc;(print(varc);close(varf))))))))
+
+Symbol Table:
+[ 
+]
+Output Table:
+
+File Table:
+{}
+------------------
+Execution Stack: 
+(varf = test.in;(Open(varf);(int varc;(Read from varf into varc;(print(varc);(Read from varf into varc;(print(varc);close(varf))))))))
+
+Symbol Table:
+[ 
+varf: , 
+]
+Output Table:
+
+File Table:
+{}
+------------------
+Execution Stack: 
+varf = test.in
+(Open(varf);(int varc;(Read from varf into varc;(print(varc);(Read from varf into varc;(print(varc);close(varf)))))))
+
+Symbol Table:
+[ 
+varf: , 
+]
+Output Table:
+
+File Table:
+{}
+------------------
+Execution Stack: 
+(Open(varf);(int varc;(Read from varf into varc;(print(varc);(Read from varf into varc;(print(varc);close(varf)))))))
+
+Symbol Table:
+[ 
+varf: test.in, 
+]
+Output Table:
+
+File Table:
+{}
+------------------
+Execution Stack: 
+Open(varf)
+(int varc;(Read from varf into varc;(print(varc);(Read from varf into varc;(print(varc);close(varf))))))
+
+Symbol Table:
+[ 
+varf: test.in, 
+]
+Output Table:
+
+File Table:
+{}
+------------------
+Execution Stack: 
+(int varc;(Read from varf into varc;(print(varc);(Read from varf into varc;(print(varc);close(varf))))))
+
+Symbol Table:
+[ 
+varf: test.in, 
+]
+Output Table:
+
+File Table:
+{test.in=java.io.BufferedReader@17f052a3}
+------------------
+Execution Stack: 
+int varc
+(Read from varf into varc;(print(varc);(Read from varf into varc;(print(varc);close(varf)))))
+
+Symbol Table:
+[ 
+varf: test.in, 
+]
+Output Table:
+
+File Table:
+{test.in=java.io.BufferedReader@17f052a3}
+------------------
+Execution Stack: 
+(Read from varf into varc;(print(varc);(Read from varf into varc;(print(varc);close(varf)))))
+
+Symbol Table:
+[ 
+varf: test.in, 
+varc: 0, 
+]
+Output Table:
+
+File Table:
+{test.in=java.io.BufferedReader@17f052a3}
+------------------
+Execution Stack: 
+Read from varf into varc
+(print(varc);(Read from varf into varc;(print(varc);close(varf))))
+
+Symbol Table:
+[ 
+varf: test.in, 
+varc: 0, 
+]
+Output Table:
+
+File Table:
+{test.in=java.io.BufferedReader@17f052a3}
+------------------
+Execution Stack: 
+(print(varc);(Read from varf into varc;(print(varc);close(varf))))
+
+Symbol Table:
+[ 
+varf: test.in, 
+varc: 10, 
+]
+Output Table:
+
+File Table:
+{test.in=java.io.BufferedReader@17f052a3}
+------------------
+Execution Stack: 
+print(varc)
+(Read from varf into varc;(print(varc);close(varf)))
+
+Symbol Table:
+[ 
+varf: test.in, 
+varc: 10, 
+]
+Output Table:
+
+File Table:
+{test.in=java.io.BufferedReader@17f052a3}
+------------------
+Execution Stack: 
+(Read from varf into varc;(print(varc);close(varf)))
+
+Symbol Table:
+[ 
+varf: test.in, 
+varc: 10, 
+]
+Output Table:
+10
+
+File Table:
+{test.in=java.io.BufferedReader@17f052a3}
+------------------
+Execution Stack: 
+Read from varf into varc
+(print(varc);close(varf))
+
+Symbol Table:
+[ 
+varf: test.in, 
+varc: 10, 
+]
+Output Table:
+10
+
+File Table:
+{test.in=java.io.BufferedReader@17f052a3}
+------------------
+Execution Stack: 
+(print(varc);close(varf))
+
+Symbol Table:
+[ 
+varf: test.in, 
+varc: 20, 
+]
+Output Table:
+10
+
+File Table:
+{test.in=java.io.BufferedReader@17f052a3}
+------------------
+Execution Stack: 
+print(varc)
+close(varf)
+
+Symbol Table:
+[ 
+varf: test.in, 
+varc: 20, 
+]
+Output Table:
+10
+
+File Table:
+{test.in=java.io.BufferedReader@17f052a3}
+------------------
+Execution Stack: 
+close(varf)
+
+Symbol Table:
+[ 
+varf: test.in, 
+varc: 20, 
+]
+Output Table:
+10
+20
+
+File Table:
+{test.in=java.io.BufferedReader@17f052a3}
+------------------
+Execution Stack: 
+
+Symbol Table:
+[ 
+varf: test.in, 
+varc: 20, 
+]
+Output Table:
+10
+20
+
+File Table:
+{}

@@ -1,0 +1,36 @@
+; 16. Determine if a tree of type (2) is ballanced (the difference between the depth of two subtrees is 
+; equal to 1)
+
+(defun my_max (a b)
+    (cond 
+        ((< a b) b)
+        (t a)
+    )
+)
+
+(defun absDiff (a b)
+    (cond
+        ((< a b) (- b a))
+        (t (- a b))
+    )
+)
+
+; getDepth(l1 l2 l3) = 0, if n = 0
+; = 1 + max(getDepth(l2), getDepth(l3)), otherwise
+
+(defun getDepth(l)
+    (cond
+        ((null l) 0)
+        (t (+ 1 (my_max (getDepth (cadr l)) (getDepth (caddr l)))))
+    )
+)
+
+(defun isBalanced(l)
+    (cond
+        ((null l) t)
+        ((< 1 (absDiff (getDepth (cadr l)) (getDepth (caddr l)))) nil)
+        (t (and (isBalanced (cadr l)) (isBalanced (caddr l))))
+    )
+)
+
+(print (isBalanced '(A (B (G)) (C (D) (E (F))) ) ))

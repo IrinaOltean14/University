@@ -1,0 +1,25 @@
+; 4. Convert a tree of type (2) to type (1).
+
+(defun my_append (l1 l2)
+    (cond
+        ((null l1) l2)
+        (t (cons (car l1) (my_append (cdr l1) l2)))
+    )
+)
+
+; convert(l1 l2 l3) = nil, if n = 0
+; = l1 + 2 + convert(l2) + convert(l3), if n = 3
+; = l1 + 1 + convert(l2), if n = 2
+; = l1 + 0, if n = 1
+
+
+(defun convert (l)
+    (cond
+        ((null l) nil)
+        ((null (cdr l)) (list (car l) 0))
+        ((null (cddr l)) (my_append (list (car l) 1) (convert (cadr l))))
+        (t (my_append (my_append (list (car l) 2) (convert (cadr l))) (convert (caddr l))))
+    )
+)
+
+(print (convert '(A (B) (C (D) (E))) ))

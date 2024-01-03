@@ -1,0 +1,33 @@
+; 11. Return the level (and coresponded list of nodes) with maximum number of nodes for a tree of type 
+; (2). The level of the root element is 0.
+
+(defun my_length (l)
+    (cond
+        ((null l) 0)
+        (t (+ 1 (my_length (cdr l))))
+    )
+)
+
+(defun max_length(l1 l2)
+    (cond
+        ((< (my_length l1) (my_length l2)) l2)
+        (t l1)
+    )
+)
+
+; level(l1...ln) = nil, if n = 0
+; = l1 + max_length(level(l2), level(l3)), otherwise
+
+(defun level (l)
+    (cond
+        ((null l) nil)
+        (t (cons (car l) (max_length (level (cadr l)) (level (caddr l)))))
+    )
+)
+
+(defun main(l)
+    (print (level l))
+    (print (my_length (level l)))
+)
+
+(main '(A (B) (C (D (F)) (E))))

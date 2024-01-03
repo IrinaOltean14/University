@@ -1,0 +1,72 @@
+; 9. Convert a tree of type (1) to type (2).
+
+; (A 2 B 0 C 2 D 0 E 1 F 0) -> (A (B) (C (D) (E (F))))
+
+; my_append(l1...ln, p1..pm) = p1...pm, if n = 0
+                            ;= l1 + my_append(l2...ln, p1...pm), otherwise
+
+(defun my_append (l p)
+    (cond
+        ((null l) p)
+        (t (cons (car l) (my_append (cdr l) p)))
+    )
+)
+
+;(write (my_append '(1 2 3) '(4 5 6)))
+
+; extract_left(l1...ln, nodes, edges) = [], if n = 0
+                                     ;= [], if nodes = edges + 1 -> this means that we completed the subtree
+                                     ;= l1 + l2 + extract_left(l3...ln, nodes + 1, edges + l2)
+(defun extract_left(l nodes edges)
+    (cond
+        ((null l) nil)
+        ((= nodes (+ edges 1)) nil)
+        (t (cons (car l) (cons (cadr l) (extract_left (cddr l) (+ 1 nodes) (+ (cadr l) edges)))))
+    )
+)
+
+;(write (extract_left '(B 0 C 2 D 0 E 1 F 0) 0 0))
+
+; extract_left_subtree(l) - wrapper for extract_left
+; extract_left_subtree(l1...ln) = extract_left(l3...ln, 0, 0)
+
+(defun extract_left_subtree (l)
+    (extract_left (cddr l) 0 0)
+)
+    
+; (write (extract_left_subtree '(A 2 B 0 C 2 D 0 E 1 F 0)))
+
+; extract_right(l1...ln, nodes, edges) = [], if n = 0
+                                      ;= l, if nodes = edges + 1
+                                      ;= extract_right(l3...ln, nodes + 1, edges + l2), otherwise
+
+(defun extract_right(l nodes edges)
+    (cond
+        ((null l) nil)
+        ((= nodes (+ edges 1)) l)
+        (t (extract_right (cddr l) (+ 1 nodes) (+ (cadr l) edges)))
+    )
+)
+
+; extract_right_subtree(l1...ln) = extract_right(l3...ln, 0, 0)
+
+(defun extract_right_subtree (l)
+    (extract_right (cddr l) 0 0)
+)
+
+;(write (extract_right_subtree '(A 2 B 0 C 2 D 0 E 1 F 0)))
+
+; convert(l1l2...ln) = [], if n = 0
+                    ;= my_append([l1], convert(extract_left_subtree(l1...ln)) + convert(extract_right_subtree(l1...ln))), if l1 = 2
+                    ;= my_append([l1], convert(extract_left_subtree(l1...ln))), if l2 = 1
+                    ;= [l1], if l2 = 0
+(defun convert(l)
+    (cond
+        ((null l) nill)
+        ((equal (cadr l) 2) (my_append (list (car l)) (cons (convert(extract_left_subtree l)) (list (convert(extract_right_subtree l))))))
+        ((equal (cadr l) 1) (my_append (list (car l)) (list (convert(extract_left_subtree l)))))
+        (t (list (car l)))
+  )
+)
+
+(write (convert '(A 2 B 2 X 0 Y 0 C 2 D 0 E 1 F 0)))

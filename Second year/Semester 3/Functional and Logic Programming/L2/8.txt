@@ -1,0 +1,20 @@
+; 8. Return the list of nodes of a tree of type (2) accessed inorder
+
+; inorder(l1l2l3) = nil, if n = 0
+; = inorder(l2) + l1 + inorder(l3), otherwise
+
+(defun my_append (l1 l2)
+    (cond
+        ((null l1) l2)
+        (t (cons (car l1) (my_append (cdr l1) l2)))
+    )
+)
+
+(defun inorder (l)
+    (cond
+        ((null l) nil)
+        (t (my_append (my_append (inorder (cadr l)) (list (car l))) (inorder (caddr L))))
+    )
+)
+
+(print (inorder '(A (B (F)) (C (D) (E)))))

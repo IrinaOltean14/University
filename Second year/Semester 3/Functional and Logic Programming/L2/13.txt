@@ -1,0 +1,39 @@
+; 13.  For a given tree of type (2) return the path from the root node to a certain given node X
+
+
+; check(l1..ln, p) = t, if l1 = p
+; = nil, if n = 0
+; = check(l2..ln, p) if l1 atom
+; = or(check(l1), check(l2...ln)), if l1 list
+
+(defun check (l p)
+    (cond
+        ((null l) nil)
+        ((eql (car l) p) t)
+        ((atom (car l)) (check (cdr l) p))
+        (t (or (check (cdr l) p) (check (car l) p)))
+    )
+)
+
+; path(l1...ln, p) = l1, if l1 = p
+; = l1 + path(l2, p), if check(l2, p)
+; = l1 + path(l3, p), if check(l3, p)
+; = nil, otherwise
+
+
+(defun path (l p)
+    (cond
+        ((eql (car l) p) (list p))
+        ((check (cadr l) p) (cons (car l) (path (cadr l) p)))
+        ((check (caddr l) p) (cons (car l) (path (caddr l) p)))
+        (t nil)
+    )
+)
+
+(print (path '(A (B) (C (D) (E))) 'E))
+    
+    
+    
+    
+    
+    

@@ -1,0 +1,70 @@
+; 5. Return the level (depth) of a node in a tree of type (1). The level of the root element is 0.
+
+; parcurg_st(l1...ln, n, m) = nil, if l is null
+; = nil, if n = m + 1
+; = l1 + l2 + parcurg_st(l3...ln, n+1, m+l2)
+
+(defun parcurg_st (l n m)
+    (cond
+        ((null l) nil)
+        ((= n (+ m 1)) nil)
+        (t (cons (car l) (cons (cadr l) (parcurg_st (cddr l) (+ n 1) (+ m (cadr l))))))
+    )
+)
+
+(defun stang (l)
+    (parcurg_st (cddr l) 0 0)
+)
+
+;(print (stang '(A 2 B 1 X 0 C 2 D 0 E 0) ))
+
+
+(defun parcurg_dr (l n m)
+    (cond
+        ((null l) nil)
+        ((= n (+ m 1)) l)
+        (t (parcurg_dr (cddr l) (+ n 1) (+ m (cadr l))))
+    )
+)
+
+(defun drept (l)
+    (parcurg_dr (cddr l) 0 0)
+)
+
+;(print (drept '(A 2 B 1 X 0 C 2 D 0 E 0) ))
+
+; check -> function to verify if a node is in a subtree
+; check(l1...ln, p) = nil, if n = 0
+; = t, if l1 = p
+; = check(l2...ln, p), otherwise
+
+(defun check(l p)
+    (cond
+        ((null l) nil)
+        ((eql (car l) p) t)
+        (t (check (cdr l) p))
+    )
+)
+
+; depth(l1...ln, p) = 0, if l1 = p
+; = 1 + depth(stang(l)), if check(stang(l))
+; = 1 + depth(drept(l)), if check(drept(l))
+; = nil, otherwise
+
+(defun depth (l p)
+    (cond
+        ((eql (car l) p) 0)
+        ((check (stang l) p) (+ 1 (depth (stang l) p)))
+        ((check (drept l) p) (+ 1 (depth (drept l) p)))
+        (t nil)
+    )
+)
+
+(print (depth '(A 2 B 0 C 2 D 0 E 0)  'F))
+
+
+
+
+
+
+

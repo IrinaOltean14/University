@@ -1,0 +1,20 @@
+; 15. Determine the list of nodes accesed in postorder in a tree of type (2).
+
+; postorder(l1 l2 l3) = nil, if n = 0
+; = postorder(l2) + postorder(l3) + l1, otherwise
+
+(defun my_append (l1 l2)
+    (cond
+        ((null l1) l2)
+        (t (cons (car l1) (my_append (cdr l1) l2)))
+    )
+)
+
+(defun postorder (l)
+    (cond
+        ((null l) nil)
+        (t (my_append (my_append (postorder (cadr l)) (postorder (caddr l))) (list (car l))))
+    )
+)
+
+(print (postorder '(A (B) (C (D) (E))) ))

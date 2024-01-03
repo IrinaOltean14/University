@@ -1,0 +1,30 @@
+; 15. Write a function that reverses a list together with all its sublists elements, at any level
+
+(defun my_append (l1 l2)
+    (cond
+        ((null l1) l2)
+        (t (cons (car l1) (my_append (cdr l1) l2)))
+     )
+)
+
+
+(defun my_reverse (l)
+    (cond
+        ((null l) nil)
+        (t (my_append (my_reverse (cdr l)) (list (car l))))
+    )
+)
+
+
+; rev(l) = l, if l atom
+; = my_reverse(reun(rev(l1), ... rev(ln))), otherwise
+
+(defun rev(l)
+    (cond
+        ((atom l) l)
+        (t (mapcar #'rev (my_reverse l)))
+    )
+)
+
+
+(print (rev '(1 2 3 (5 6 7) 8) ))

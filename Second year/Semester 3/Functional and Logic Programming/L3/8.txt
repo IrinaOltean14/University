@@ -1,0 +1,17 @@
+; 8. Write a function to determine the number of nodes on the level k from a n-tree represented as follows: 
+;(root list_nodes_subtree1 ... list_nodes_subtreen) 
+;Eg: tree is (a (b (c)) (d) (e (f))) and k=1 => 3 nodes
+
+; nodes(l, k) = 1, if l atom and k = 0
+; = 0, if l atom
+; = nodes(l1, k-1) + nodes(l2, k-1) + ... + nodes (ln, k-1), otherwise
+
+(defun nodes(l k)
+    (cond
+        ((and (atom l) (= k -1)) 1)
+        ((atom l) 0)
+        (t (apply #'+ (mapcar #'(lambda (e) (nodes e (- k 1))) l)))
+    )
+)
+
+(print (nodes '(a (b (c)) (d) (e (f))) 1 ))

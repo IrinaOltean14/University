@@ -1,0 +1,18 @@
+; 9. Write a function that removes all occurrences of an atom from any level of a list.
+
+; rem(l, e) = nil, if l = e
+; = l, if l atom
+; = reuniune(rem(l1,e), ..., rem(l2,e)), otherwise
+
+(defun my_rem (l e)
+   (cond
+       ((and (atom l) (eql l e)) nil)
+       ((atom l) (list l))
+       (t (list (mapcan #'(lambda (a) (my_rem a e)) l)))
+   )
+)
+
+(defun main(l e)
+    (car (my_rem l e)))
+
+(print (main '(1 2 3 (2 1 (1))) 1 ))

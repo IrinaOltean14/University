@@ -1,0 +1,13 @@
+; 14. Write a function that returns the number of atoms in a list, at any level
+
+; atoms(l) = 1, if l atom
+; = atoms(l1) + .. + atoms(ln), if l = l1...ln
+
+(defun atoms (l)
+    (cond
+        ((atom l) 1)
+        (t (apply '+ (mapcar #'atoms l)))
+    )
+)
+
+(print (atoms '(1 2 (1 (2) 1) 1) ))

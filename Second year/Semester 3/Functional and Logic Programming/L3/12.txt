@@ -1,0 +1,15 @@
+; 12. Write a function that substitutes an element through another one at all levels of a given list
+
+; my_replace(l, e, g) = g , if l = e
+; = l, if l atom
+; = reuniune(my_replace(l1,e,g),...my_replace(ln,e,g)), if l = l1...ln
+
+(defun my_replace (l e g)
+    (cond
+        ((and (atom l) (eql l e)) g)
+        ((atom l) l)
+        (t (mapcar #'(lambda (a) (my_replace a e g)) l))
+    )
+)
+
+(print (my_replace '(1 2 3 (1 2 3) (1) (2 (1))) 1 5))

@@ -1,0 +1,24 @@
+; 1. Write a function to check if an atom is member of a list (the list is non-liniar)
+
+; my_member(l, e) = t, if l atom and l = e
+; = nil, if l atom
+; = or(my_member(li, e)), otherwise
+
+(defun my_or(l)
+    (cond
+        ((null l) nil)
+        ((car l) t)
+        (t (my_or (cdr l)))
+    )
+)
+
+(defun my_member (l e)
+    (cond
+        ((and (atom l) (eql l e)) t)
+        ((atom l) nil)
+        (t (funcall #'my_or (mapcar #'(lambda (a)
+                             (my_member a e)) l)))
+    )
+)
+
+(print (my_member '(1 2 (5) 3) 5))

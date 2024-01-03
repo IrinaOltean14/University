@@ -1,0 +1,17 @@
+; 10. Define a function that replaces one node with another one in a n-tree represented as: root 
+;list_of_nodes_subtree1... list_of_nodes_subtreen) 
+;Eg: tree is (a (b (c)) (d) (e (f))) and node 'b' will be replace with node 'g' => tree (a (g (c)) (d) (e (f)))}
+
+; my_replace(l, e, g) = g , if l = e
+; = l, if l atom
+; = reuniune(my_replace(l1,e,g),...my_replace(ln,e,g)), if l = l1...ln
+
+(defun my_replace (l e g)
+    (cond
+        ((and (atom l) (eql l e)) g)
+        ((atom l) l)
+        (t (mapcar #'(lambda (a) (my_replace a e g)) l))
+    )
+)
+
+(print (my_replace '(a (b (c)) (d) (e (f))) 'b 'g))

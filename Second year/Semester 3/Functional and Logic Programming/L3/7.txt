@@ -1,0 +1,19 @@
+; 7. Write a function that substitutes an element E with all elements of a list L1 at all levels of a given list 
+;L.
+
+; subst(l, e, l1) = l1, if l = e
+; = l, if l atom
+; = reun(subst(l1), ... subst(ln)), otherwise
+
+(defun my_subst (l e l1)
+    (cond
+        ((and (atom l) (eql l e)) l1)
+        ((atom l) (list l))
+        (t (list (apply #'append (mapcar #'(lambda (a) (my_subst a e l1)) l))))
+    )
+)
+
+(defun main (l e l1)
+    (car (my_subst l e l1)))
+
+(print (main '(1 2 3 (1 2)) 1 '(5 5)))

@@ -1,0 +1,20 @@
+; 16. Write a function that produces the linear list of all atoms of a given list, from all levels, and written in 
+;the same order. Eg.: (((A B) C) (D E)) --> (A B C D E)
+
+(defun linear (l)
+    (cond
+        ((atom l) (list l))
+        (t (apply #'append (mapcar #' linear l)))
+    )
+)
+
+(print (linear '(((A B) C) (D E)) ))
+
+(defun linear2 (l)
+    (cond
+        ((atom l) (list l))
+        (t (mapcan #' linear2 l))
+    )
+)
+
+(print (linear2 '(((A B) C) (D E)) ))

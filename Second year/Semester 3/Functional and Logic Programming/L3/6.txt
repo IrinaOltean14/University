@@ -1,0 +1,30 @@
+; 6. Write a function that returns the maximum of numeric atoms in a list, at any level.
+
+(defun maximum (a b)
+    (cond
+        ((< a b) b)
+        (t a)
+    )
+)
+
+(defun max_list (l)
+    (cond
+        ((null l) 0)
+        (t (maximum (car l) (max_list (cdr l))))
+    )
+)
+
+; my_max(l) = l, if l is number
+; = 0, if l is atom
+; = maximum(my_max(l1), ..., my_max(ln)), otherwise
+
+(defun my_max (l)
+    (cond
+        ((numberp l) l)
+        ((atom l) 0)
+        (t (funcall #'max_list (mapcar #'my_max l)))
+    )
+)
+
+
+(print (my_max '(1 2 (10 A B) (11 (12))) ))

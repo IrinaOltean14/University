@@ -1,0 +1,17 @@
+; 3. Define a function to tests the membership of a node in a n-tree represented as (root 
+;list_of_nodes_subtree1 ... list_of_nodes_subtreen) 
+;Eg. tree is (a (b (c)) (d) (E (f))) and the node is "b" => true
+
+; my_member(l, e) = t, if l atom and l = e 
+; = nil, if l atom
+; = or(my_member(li, e)), if l = l1...ln
+
+(defun my_member (l e)
+    (cond
+        ((and (atom l) (eql e l)) t)
+        ((atom l) nil)
+        (t (some #'identity (mapcar #'(lambda(a) (my_member a e)) l)))
+     )
+)
+
+(print (my_member '(a (b (c)) (d) (E (f))) 'i))

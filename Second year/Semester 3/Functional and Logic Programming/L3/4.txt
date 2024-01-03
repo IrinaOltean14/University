@@ -1,0 +1,16 @@
+; 4. Write a function that returns the product of numeric atoms in a list, at any level.
+
+
+; my_product(l) = l, if l is number
+; = 1, if l atom
+; = my_product(l1) * my_product(l2) * ... * my_product(ln), if l = l1...ln
+
+(defun my_product (l)
+    (cond
+        ((numberp l) l)
+        ((atom l) 1)
+        (t (apply '* (mapcar #'my_product l)))
+    )
+)
+
+(print (my_product '(1 2 (3 2) A (B))))

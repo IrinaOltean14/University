@@ -1,0 +1,29 @@
+; 11. Write a function to determine the depth of a list.
+
+; depth(l) = 0, if l atom
+; = 1 + max(depth(l1) . ... ,depth(ln)), if l = l1...ln
+
+
+(defun maximum (a b)
+    (cond
+        ((< a b) b)
+        (t a)
+    )
+)
+
+(defun max_list (l)
+    (cond
+        ((null l) 0)
+        (t (maximum (car l) (max_list (cdr l))))
+    )
+)
+
+
+(defun depth (l)
+    (cond
+        ((atom l) 0)
+        (t (+ 1 (funcall #'max_list (mapcar #'depth l))))
+    )
+)
+
+(print (depth '(1 (2 (3)) 2 (2)) ) )
